@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine 💕</title>
+
+<style>
+/* ---------- GLOBAL STYLES ---------- */
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Comic Sans MS', cursive;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* ---------- MAIN CARD ---------- */
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px 25px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    max-width: 90%;
+    position: relative;
+    z-index: 10;
+}
+
+h1 {
+    color: #e6005c;
+    margin-bottom: 15px;
+}
+
+/* ---------- CUTE ANIMALS ---------- */
+.animals {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+/* Cat reacts on click */
+.cat:active {
+    transform: scale(1.2) rotate(10deg);
+}
+
+/* ---------- BUTTONS ---------- */
+.buttons {
+    margin-top: 20px;
+    position: relative;
+    height: 80px;
+}
+
+button {
+    position: absolute;
+    padding: 12px 28px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#yesBtn {
+    background: #ff4d6d;
+    color: white;
+    left: 20%;
+}
+
+#noBtn {
+    background: #ddd;
+    color: #333;
+    left: 55%;
+}
+
+/* ---------- MESSAGE ---------- */
+#message {
+    display: none;
+    margin-top: 20px;
+    font-size: 20px;
+    color: #ff0066;
+}
+
+/* ---------- FLOATING HEARTS & RINGS ---------- */
+.floating {
+    position: absolute;
+    bottom: -50px;
+    animation: floatUp linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120vh) scale(1.4);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ---------- MAIN CONTENT ---------- -->
+<div class="container">
+    <h1>Hi Muskan,<br>Will You Be My Valentine? 💖</h1>
+
+    <!-- Puppy & Cat -->
+    <div class="animals">
+        <div class="puppy">🐶</div>
+        <div class="cat" title="Click me!">🐱</div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttons">
+        <button id="yesBtn">Yes 💕</button>
+        <button id="noBtn">No 😝</button>
+    </div>
+
+    <!-- Final Message -->
+    <div id="message">
+        💘 I know Kittu, you will say yes! 💘<br><br>
+        Let’s meet at <b>KFC</b><br>
+        ⏰ <b>5:30</b><br><br>
+        ❤️❤️❤️
+    </div>
+</div>
+
+<script>
+/* ---------- BUTTON MOVEMENT LOGIC ---------- */
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const message = document.getElementById("message");
+
+// Move buttons randomly
+function moveButton(btn) {
+    btn.style.left = Math.random() * 60 + "%";
+    btn.style.top = Math.random() * 40 + "%";
+}
+
+// NO button runs away on hover
+noBtn.addEventListener("mouseover", () => moveButton(noBtn));
+
+// YES button moves once, then shows message
+yesBtn.addEventListener("click", () => {
+    moveButton(yesBtn);
+    message.style.display = "block";
+});
+
+/* ---------- FLOATING HEARTS & RINGS ---------- */
+function createFloating(symbol) {
+    const el = document.createElement("div");
+    el.classList.add("floating");
+    el.innerHTML = symbol;
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = (20 + Math.random() * 25) + "px";
+    el.style.animationDuration = (5 + Math.random() * 4) + "s";
+    document.body.appendChild(el);
+
+    setTimeout(() => el.remove(), 9000);
+}
+
+// Generate hearts and rings
+setInterval(() => createFloating("❤️"), 400);
+setInterval(() => createFloating("💍"), 900);
+</script>
+
+</body>
+</html>
